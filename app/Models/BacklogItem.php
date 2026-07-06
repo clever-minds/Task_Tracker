@@ -11,7 +11,6 @@ class BacklogItem extends Model
     protected $fillable = [
         'title',
         'description',
-        'suitable_role',
         'priority',
         'status',
     ];

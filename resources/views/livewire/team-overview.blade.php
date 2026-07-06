@@ -6,7 +6,6 @@
                     <a href="{{ route('employees.show', $employee) }}" class="text-lg font-semibold text-gray-900 hover:underline">
                         {{ $employee->name }}
                     </a>
-                    <p class="text-sm text-gray-500">{{ ucfirst(str_replace('_', ' ', $employee->role)) }}</p>
                 </div>
                 <span class="text-xs text-gray-400">
                     {{ $employee->last_seen_at?->diffForHumans() ?? 'Not seen yet' }}

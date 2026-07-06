@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <h3 class="text-lg font-semibold text-gray-900">{{ $employee->name }}</h3>
-                <p class="text-sm text-gray-500">{{ ucfirst(str_replace('_', ' ', $employee->role)) }} · {{ ucfirst(str_replace('_', ' ', $employee->checkin_frequency)) }} check-in</p>
+                <p class="text-sm text-gray-500">{{ ucfirst(str_replace('_', ' ', $employee->checkin_frequency)) }} check-in</p>
             </div>
             <button wire:click="$set('showTaskForm', {{ $showTaskForm ? 'false' : 'true' }})" class="px-4 py-2 bg-gray-800 text-white text-sm rounded-md hover:bg-gray-700">
                 {{ $showTaskForm ? 'Cancel' : '+ Assign task' }}

@@ -9,7 +9,6 @@ class Index extends Component
 {
     public string $title = '';
     public string $description = '';
-    public string $suitable_role = 'any';
     public int $priority = 0;
     public bool $showForm = false;
 
@@ -18,7 +17,6 @@ class Index extends Component
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'suitable_role' => 'required|in:fresher_mvp,laravel_dev,flutter_dev,freelancer_fullstack,any',
             'priority' => 'integer',
         ];
     }
@@ -30,12 +28,10 @@ class Index extends Component
         BacklogItem::create([
             'title' => $this->title,
             'description' => $this->description ?: null,
-            'suitable_role' => $this->suitable_role,
             'priority' => $this->priority,
         ]);
 
         $this->reset(['title', 'description', 'priority', 'showForm']);
-        $this->suitable_role = 'any';
     }
 
     public function close(BacklogItem $item): void

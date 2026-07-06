@@ -15,7 +15,6 @@ class IdlePanel extends Component
     public function suggestFromBacklog(Employee $employee, ChatMessageService $chat): void
     {
         $backlogItem = BacklogItem::where('status', 'open')
-            ->whereIn('suitable_role', [$employee->role, 'any'])
             ->orderByDesc('priority')
             ->first();
 

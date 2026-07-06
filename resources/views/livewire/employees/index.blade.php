@@ -14,16 +14,6 @@
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">Role</label>
-                <select wire:model="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    <option value="fresher_mvp">Fresher / No-code MVP builder</option>
-                    <option value="laravel_dev">Laravel full-stack dev</option>
-                    <option value="flutter_dev">Flutter dev</option>
-                    <option value="freelancer_fullstack">Freelance full-stack/API dev</option>
-                </select>
-            </div>
-
-            <div>
                 <label class="block text-sm font-medium text-gray-700">Email (for daily reminder only, optional)</label>
                 <input type="email" wire:model="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                 @error('email') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
@@ -49,7 +39,6 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Their link</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                     <th class="px-6 py-3"></th>
@@ -61,7 +50,6 @@
                         <td class="px-6 py-4">
                             <a href="{{ route('employees.show', $employee) }}" class="text-indigo-600 hover:underline font-medium">{{ $employee->name }}</a>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-600">{{ ucfirst(str_replace('_', ' ', $employee->role)) }}</td>
                         <td class="px-6 py-4">
                             <input type="text" readonly value="{{ url('/c/'.$employee->chat_token) }}" onclick="this.select()" class="text-xs w-64 rounded-md border-gray-300 bg-gray-50">
                         </td>

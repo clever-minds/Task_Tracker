@@ -9,7 +9,6 @@ use Livewire\Component;
 class Index extends Component
 {
     public string $name = '';
-    public string $role = 'fresher_mvp';
     public string $email = '';
     public string $checkin_frequency = 'daily';
 
@@ -19,7 +18,6 @@ class Index extends Component
     {
         return [
             'name' => 'required|string|max:100',
-            'role' => 'required|in:fresher_mvp,laravel_dev,flutter_dev,freelancer_fullstack',
             'email' => 'nullable|email|max:150',
             'checkin_frequency' => 'required|in:daily,every_2_days,weekly',
         ];
@@ -31,14 +29,12 @@ class Index extends Component
 
         Employee::create([
             'name' => $this->name,
-            'role' => $this->role,
             'email' => $this->email ?: null,
             'checkin_frequency' => $this->checkin_frequency,
             'chat_token' => Str::random(40),
         ]);
 
         $this->reset(['name', 'email']);
-        $this->role = 'fresher_mvp';
         $this->checkin_frequency = 'daily';
         $this->showForm = false;
     }

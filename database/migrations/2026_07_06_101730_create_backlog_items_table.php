@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('suitable_role', ['fresher_mvp', 'laravel_dev', 'flutter_dev', 'freelancer_fullstack', 'any'])->default('any');
             $table->integer('priority')->default(0);
             $table->enum('status', ['open', 'assigned', 'closed'])->default('open');
             $table->timestamp('created_at')->nullable();
