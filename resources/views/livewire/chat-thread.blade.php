@@ -159,11 +159,11 @@
                         + Add Task
                     </button>
                     @if ($isAway)
-                        <button disabled class="text-[11px] px-3 py-1 bg-emerald-50 text-emerald-700 font-semibold rounded-full border border-emerald-100 shadow-sm cursor-not-allowed select-none animate-fadeIn">
+                        <button disabled class="text-[11px] px-3 py-1 bg-amber-50 text-amber-700 font-semibold rounded-full border border-amber-100 shadow-sm cursor-not-allowed select-none animate-fadeIn">
                             Away Today ✅
                         </button>
                     @else
-                        <button wire:click="markAway" wire:confirm="Mark today as away?" class="text-[11px] px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-750 font-semibold rounded-full border border-gray-200 shadow-sm transition">
+                        <button wire:click="markAway" wire:confirm="Mark today as away?" class="text-[11px] px-3 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 font-semibold rounded-full border border-amber-100 shadow-sm transition">
                             Mark Away
                         </button>
                     @endif

@@ -169,7 +169,13 @@ class ChatMessageService
     {
         DailyLog::updateOrCreate(
             ['employee_id' => $employee->id, 'log_date' => now()->startOfDay()],
-            ['reply_text' => 'Marked today as away', 'replied_at' => now()]
+            [
+                'reply_text' => 'Marked today as away',
+                'task_id' => null,
+                'status_reported' => null,
+                'next_plan' => null,
+                'replied_at' => now(),
+            ]
         );
 
         $employee->update(['last_seen_at' => now()]);
