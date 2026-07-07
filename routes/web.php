@@ -31,6 +31,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('backlog.index');
 });
 
+Route::get('/run-migrations', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return 'Migrations completed successfully!';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
+
 Route::get('/c/{chat_token}', [ChatController::class, 'show'])->name('chat.show');
 
 require __DIR__.'/auth.php';
