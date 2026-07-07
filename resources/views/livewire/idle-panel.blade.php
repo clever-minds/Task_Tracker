@@ -27,9 +27,18 @@
                         </p>
                     </div>
                 </div>
-                <button wire:click="suggestFromBacklog({{ $employee->id }})" class="text-xs px-3.5 py-1.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition shadow-sm">
-                    Suggest from Backlog
-                </button>
+                @php
+                    $hasTasks = $employee->tasks()->whereIn('status', ['todo', 'in_progress', 'blocked'])->exists();
+                @endphp
+                @if ($hasTasks)
+                    <button wire:click="suggestFromBacklog({{ $employee->id }})" wire:confirm="This employee already has tasks allotted. Do you want to allot more?" class="text-xs px-3.5 py-1.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition shadow-sm">
+                        Suggest from Backlog
+                    </button>
+                @else
+                    <button wire:click="suggestFromBacklog({{ $employee->id }})" class="text-xs px-3.5 py-1.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition shadow-sm">
+                        Suggest from Backlog
+                    </button>
+                @endif
             </div>
         @empty
             <div class="text-center py-6 border border-dashed border-gray-200 rounded-xl bg-gray-50/30">
