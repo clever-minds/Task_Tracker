@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            @if ($showTaskForm)
+            <div x-data="{ show: @entangle('showTaskForm') }" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4 scale-95" x-transition:enter-end="opacity-100 transform translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform translate-y-0 scale-100" x-transition:leave-end="opacity-0 transform -translate-y-4 scale-95" class="origin-top" x-cloak>
                 <form wire:submit="assignTask" class="mt-6 space-y-4 border-t border-gray-100 pt-6">
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Title</label>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </form>
-            @endif
+            </div>
         </div>
 
         @if($filterDate)
@@ -148,14 +148,22 @@
             <div x-show="tab === 'active'" class="space-y-4">
                 @php $activeTasks = $employee->tasks->whereIn('status', ['todo', 'in_progress', 'blocked']); @endphp
                 @forelse ($activeTasks as $task)
-                    <div class="border border-gray-100 hover:border-gray-200 hover:shadow-sm rounded-xl p-4 transition duration-150">
+                    @php
+                        $borderLeftColor = match($task->status) {
+                            'in_progress' => 'border-l-4 border-l-blue-500',
+                            'blocked' => 'border-l-4 border-l-rose-500',
+                            'todo' => 'border-l-4 border-l-gray-300',
+                            default => 'border-l-4 border-l-gray-150',
+                        };
+                    @endphp
+                    <div class="border border-gray-150 {{ $borderLeftColor }} hover:shadow-md hover:border-indigo-100 rounded-xl p-4 transition duration-150">
                         <div class="flex justify-between items-start gap-4">
                             <div>
-                                <h5 class="font-semibold text-gray-900 text-sm">{{ $task->title }}</h5>
-                                <p class="text-xs text-gray-400 mt-1 flex items-center gap-2">
-                                    <span class="font-medium px-2 py-0.5 rounded bg-gray-100 text-gray-600 uppercase">{{ str_replace('_', ' ', $task->source) }}</span>
+                                <h5 class="font-bold text-gray-900 text-sm">{{ $task->title }}</h5>
+                                <p class="text-[10px] text-gray-400 mt-1.5 flex items-center gap-2">
+                                    <span class="font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600 uppercase tracking-wider">{{ str_replace('_', ' ', $task->source) }}</span>
                                     <span>·</span>
-                                    <span class="{{ $task->priority === 'urgent' ? 'text-rose-600 font-bold' : 'text-gray-400' }}">{{ ucfirst($task->priority) }} Priority</span>
+                                    <span class="{{ $task->priority === 'urgent' ? 'text-rose-600 font-bold' : 'text-gray-400 font-medium' }}">{{ ucfirst($task->priority) }} Priority</span>
                                 </p>
                             </div>
                             <!-- Status Badge -->
@@ -163,20 +171,20 @@
                                 $badgeColor = match($task->status) {
                                     'in_progress' => 'bg-blue-50 text-blue-700 border-blue-100',
                                     'blocked' => 'bg-rose-50 text-rose-700 border-rose-100',
-                                    default => 'bg-gray-50 text-gray-600 border-gray-100',
+                                    default => 'bg-gray-50 text-gray-600 border-gray-150',
                                 };
                             @endphp
-                            <span class="text-xs px-2.5 py-1 rounded-full border {{ $badgeColor }} font-medium">{{ $task->statusLabel() }}</span>
+                            <span class="text-[10px] px-2.5 py-1 rounded-full border {{ $badgeColor }} font-bold uppercase tracking-wider">{{ $task->statusLabel() }}</span>
                         </div>
 
                         @if ($task->description)
-                            <p class="text-xs text-gray-600 mt-2 bg-gray-50 p-2.5 rounded-lg leading-relaxed">{{ $task->description }}</p>
+                            <p class="text-xs text-gray-600 mt-2.5 bg-gray-50 p-2.5 rounded-lg leading-relaxed border border-gray-100">{{ $task->description }}</p>
                         @endif
 
                         <div class="mt-4 flex gap-2">
-                            <input type="text" wire:model="commentText.{{ $task->id }}" placeholder="Comment on this task…" class="flex-1 text-xs rounded-lg border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm py-1.5">
-                            <button wire:click="addComment({{ $task->id }})" class="text-xs px-3 py-1.5 bg-gray-50 border border-gray-200 text-gray-750 font-semibold rounded-lg hover:bg-gray-100 transition shadow-sm">Comment</button>
-                            <button wire:click="deleteTask({{ $task->id }})" wire:confirm="Are you sure you want to delete this task? This will remove all associated chat history for this task." class="text-xs px-3 py-1.5 bg-rose-50 border border-rose-150 text-rose-700 font-semibold rounded-lg hover:bg-rose-100 transition shadow-sm">Delete</button>
+                            <input type="text" wire:model="commentText.{{ $task->id }}" placeholder="Comment on this task…" class="flex-1 text-xs rounded-lg border-gray-200 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm py-1.5 px-3">
+                            <button wire:click="addComment({{ $task->id }})" class="text-xs px-3 py-1.5 bg-gray-50 border border-gray-200 text-gray-750 font-bold rounded-lg hover:bg-gray-100 transition shadow-sm">Comment</button>
+                            <button wire:click="deleteTask({{ $task->id }})" wire:confirm="Are you sure you want to delete this task? This will remove all associated chat history for this task." class="text-xs px-3 py-1.5 bg-rose-50 border border-rose-150 text-rose-700 font-bold rounded-lg hover:bg-rose-100 transition shadow-sm">Delete</button>
                         </div>
                     </div>
                 @empty

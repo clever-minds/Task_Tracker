@@ -5,7 +5,7 @@
         </button>
     </div>
 
-    @if ($showForm)
+    <div x-data="{ show: @entangle('showForm') }" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4 scale-95" x-transition:enter-end="opacity-100 transform translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform translate-y-0 scale-100" x-transition:leave-end="opacity-0 transform -translate-y-4 scale-95" class="origin-top" x-cloak>
         <form wire:submit="create" class="bg-white shadow-sm rounded-lg p-6 space-y-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700">Name</label>
@@ -32,7 +32,7 @@
                 Create employee
             </button>
         </form>
-    @endif
+    </div>
 
     <div class="bg-white shadow-sm rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">

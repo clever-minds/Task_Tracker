@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto flex flex-col h-[100dvh] bg-gray-50/50 border-x border-gray-200" wire:poll.4s="$refresh">
+<div class="max-w-2xl mx-auto flex flex-col h-[100dvh] bg-gradient-to-b from-slate-50 to-gray-100/55 border-x border-gray-200 shadow-2xl" wire:poll.4s="$refresh">
     <!-- Header -->
     <div class="border-b bg-white px-6 py-4 flex items-center justify-between shadow-sm shrink-0">
         <div class="flex items-center gap-3">

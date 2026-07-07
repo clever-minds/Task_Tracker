@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (\Illuminate\Support\Facades\DB::connection() instanceof \Illuminate\Database\SQLiteConnection) {
+            \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = ON;');
+        }
     }
 }
