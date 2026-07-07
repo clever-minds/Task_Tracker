@@ -33,6 +33,10 @@ class DispatchDailyPrompts extends Command
 
     private function isDueToday(Employee $employee, \Illuminate\Support\Carbon $today): bool
     {
+        if ($today->isSaturday() || $today->isSunday()) {
+            return false;
+        }
+
         return match ($employee->checkin_frequency) {
             'daily' => true,
             'every_2_days' => $today->dayOfYear % 2 === $employee->id % 2,

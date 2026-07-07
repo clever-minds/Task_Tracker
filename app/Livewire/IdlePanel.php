@@ -43,6 +43,7 @@ class IdlePanel extends Component
         $idleEmployees = Employee::query()
             ->where('is_active', true)
             ->whereDoesntHave('tasks', fn ($q) => $q->where('status', 'in_progress'))
+            ->whereDoesntHave('dailyLogs', fn ($q) => $q->where('log_date', now()->startOfDay())->where('reply_text', 'Marked today as away'))
             ->where(function ($q) {
                 $q->whereNull('last_seen_at')
                     ->orWhere('last_seen_at', '<', now()->subHours(self::IDLE_THRESHOLD_HOURS));

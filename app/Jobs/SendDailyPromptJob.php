@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\DailyCheckinReminder;
+use App\Models\DailyLog;
 use App\Models\Employee;
 use App\Services\ChatMessageService;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -22,6 +23,11 @@ class SendDailyPromptJob implements ShouldQueue
 
     public function handle(ChatMessageService $chat): void
     {
+        DailyLog::firstOrCreate([
+            'employee_id' => $this->employee->id,
+            'log_date' => now()->startOfDay(),
+        ]);
+
         $chat->pushDailyPrompt($this->employee);
 
         if ($this->employee->email) {

@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <div class="flex justify-end">
-        <button wire:click="$set('showForm', {{ $showForm ? 'false' : 'true' }})" class="px-4 py-2 bg-gray-800 text-white text-sm rounded-md hover:bg-gray-700">
+        <button wire:click="$toggle('showForm')" class="px-4 py-2 bg-gray-800 text-white text-sm rounded-md hover:bg-gray-700">
             {{ $showForm ? 'Cancel' : '+ Add employee' }}
         </button>
     </div>
@@ -51,7 +51,7 @@
                             <a href="{{ route('employees.show', $employee) }}" class="text-indigo-600 hover:underline font-medium">{{ $employee->name }}</a>
                         </td>
                         <td class="px-6 py-4">
-                            <input type="text" readonly value="{{ url('/c/'.$employee->chat_token) }}" onclick="this.select()" class="text-xs w-64 rounded-md border-gray-300 bg-gray-50">
+                            <input type="text" readonly value="{{ request()->getSchemeAndHttpHost() . '/c/' . $employee->chat_token }}" onclick="this.select()" class="text-xs w-64 rounded-md border-gray-300 bg-gray-50">
                         </td>
                         <td class="px-6 py-4">
                             <span class="text-xs px-2 py-1 rounded-full {{ $employee->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">

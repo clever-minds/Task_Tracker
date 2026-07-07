@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <div class="flex justify-end">
-        <button wire:click="$set('showForm', {{ $showForm ? 'false' : 'true' }})" class="px-4 py-2 bg-gray-800 text-white text-sm rounded-md hover:bg-gray-700">
+        <button wire:click="$toggle('showForm')" class="px-4 py-2 bg-gray-800 text-white text-sm rounded-md hover:bg-gray-700">
             {{ $showForm ? 'Cancel' : '+ Add backlog item' }}
         </button>
     </div>

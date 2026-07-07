@@ -48,4 +48,16 @@ class Task extends Model
     {
         return $this->hasMany(ChatMessage::class);
     }
+
+    public function statusLabel(): string
+    {
+        return match ($this->status) {
+            'done' => 'Completed',
+            'paused' => 'Postponed',
+            'cancelled' => 'Cancelled',
+            'in_progress' => 'In Progress',
+            'blocked' => 'Blocked',
+            default => 'Todo',
+        };
+    }
 }

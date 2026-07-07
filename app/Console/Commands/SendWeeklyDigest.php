@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Mail\WeeklyDigestMail;
 use App\Models\Employee;
+use App\Models\TaskEvent;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +24,10 @@ class SendWeeklyDigest extends Command
             $doneThisWeek = $employee->tasks()->where('status', 'done')->whereBetween('completed_at', [$start, $end])->count();
             $carryover = $employee->tasks()->where('status', 'in_progress')->count();
             $idleDays = $employee->dailyLogs()->whereBetween('log_date', [$start, $end])->whereNull('replied_at')->count();
-            $reworkCount = $employee->tasks()->where('reopened_count', '>', 0)->sum('reopened_count');
+            $reworkCount = TaskEvent::whereIn('task_id', $employee->tasks()->pluck('id'))
+                ->where('event_type', 'reopened')
+                ->whereBetween('created_at', [$start, $end])
+                ->count();
 
             return [
                 'name' => $employee->name,
