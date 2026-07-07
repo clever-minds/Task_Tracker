@@ -32,7 +32,7 @@ class WeeklyDigestMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'emails.weekly-digest',
+            markdown: 'emails.weekly-digest',
             with: ['summary' => $this->summary, 'start' => $this->start, 'end' => $this->end],
         );
     }

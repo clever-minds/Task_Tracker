@@ -28,7 +28,7 @@ class DailyCheckinReminder extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'emails.daily-checkin-reminder',
+            markdown: 'emails.daily-checkin-reminder',
             with: ['link' => url('/c/'.$this->employee->chat_token)],
         );
     }
