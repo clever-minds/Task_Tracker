@@ -33,8 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/run-migrations', function () {
     try {
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        return 'Migrations completed successfully!';
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true, '--seed' => true]);
+        return 'Migrations and Seeding completed successfully!';
     } catch (\Exception $e) {
         return 'Error: ' . $e->getMessage();
     }
