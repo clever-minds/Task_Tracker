@@ -8,13 +8,14 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        if (env('VERCEL_ENV') || env('APP_ENV') === 'production') {
-            $viewPath = '/tmp/storage/framework/views';
-            if (!is_dir($viewPath)) {
-                @mkdir($viewPath, 0755, true);
-            }
-            config(['view.compiled' => $viewPath]);
+        $default = storage_path('framework/views');
+        $viewPath = (is_dir($default) && is_writable($default)) ? $default : '/tmp/storage/framework/views';
+
+        if (!is_dir($viewPath)) {
+            @mkdir($viewPath, 0755, true);
         }
+
+        config(['view.compiled' => $viewPath]);
     }
 
     /**
