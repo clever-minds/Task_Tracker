@@ -61,6 +61,7 @@
                         <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
                             <button wire:click="regenerateLink({{ $employee->id }})" wire:confirm="Regenerate this employee's link? The old one will stop working." class="text-xs text-gray-500 hover:text-gray-800">Regenerate link</button>
                             <button wire:click="toggleActive({{ $employee->id }})" class="text-xs text-gray-500 hover:text-gray-800">{{ $employee->is_active ? 'Deactivate' : 'Activate' }}</button>
+                            <button wire:click="delete({{ $employee->id }})" wire:confirm="Are you sure you want to delete this employee? This will permanently remove the employee and delete all associated tasks, daily logs, chat history, and events." class="text-xs text-red-600 hover:text-red-900 font-medium">Delete</button>
                         </td>
                     </tr>
                 @endforeach

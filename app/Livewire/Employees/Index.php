@@ -49,6 +49,11 @@ class Index extends Component
         $employee->update(['is_active' => ! $employee->is_active]);
     }
 
+    public function delete(Employee $employee): void
+    {
+        $employee->delete();
+    }
+
     public function render()
     {
         return view('livewire.employees.index', [
