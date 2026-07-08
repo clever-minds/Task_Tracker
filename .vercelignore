@@ -7,3 +7,4 @@ storage/framework/views/*
 storage/logs/*
 .env
 *.sqlite
+
