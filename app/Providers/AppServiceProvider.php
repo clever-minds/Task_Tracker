@@ -16,8 +16,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         config(['view.compiled' => $viewPath]);
-
-        file_put_contents('php://stderr', 'DIAG register() ran | default=' . var_export($default, true) . ' is_dir=' . var_export(is_dir($default), true) . ' is_writable=' . var_export(is_writable($default), true) . ' final=' . var_export(config('view.compiled'), true) . "\n");
     }
 
     /**
@@ -25,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (\Illuminate\Support\Facades\DB::connection() instanceof \Illuminate\Database\SQLiteConnection) {
+        if (config('database.default') === 'sqlite') {
             \Illuminate\Support\Facades\DB::statement('PRAGMA foreign_keys = ON;');
         }
     }
