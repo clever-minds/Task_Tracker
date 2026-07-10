@@ -18,6 +18,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/settings/mail', function () {
+        return view('settings.mail');
+    })->name('settings.mail');
+
     Route::get('/employees', function () {
         return view('employees.index');
     })->name('employees.index');

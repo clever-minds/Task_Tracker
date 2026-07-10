@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Employees;
 
+use App\Mail\WelcomeEmployee;
 use App\Models\Employee;
+use App\Services\DynamicMailer;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -23,16 +25,20 @@ class Index extends Component
         ];
     }
 
-    public function create(): void
+    public function create(DynamicMailer $mailer): void
     {
         $this->validate();
 
-        Employee::create([
+        $employee = Employee::create([
             'name' => $this->name,
             'email' => $this->email ?: null,
             'checkin_frequency' => $this->checkin_frequency,
             'chat_token' => Str::random(40),
         ]);
+
+        if ($employee->email) {
+            $mailer->send(auth()->user(), $employee->email, new WelcomeEmployee($employee));
+        }
 
         $this->reset(['name', 'email']);
         $this->checkin_frequency = 'daily';

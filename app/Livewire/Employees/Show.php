@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Employees;
 
+use App\Mail\TaskAssignedMail;
 use App\Models\Employee;
 use App\Models\Task;
 use App\Services\ChatMessageService;
+use App\Services\DynamicMailer;
 use Livewire\Component;
 
 class Show extends Component
@@ -26,7 +28,7 @@ class Show extends Component
         $this->employee = $employee;
     }
 
-    public function assignTask(ChatMessageService $chat): void
+    public function assignTask(ChatMessageService $chat, DynamicMailer $mailer): void
     {
         $this->validate([
             'newTaskTitle' => 'required|string|max:255',
@@ -44,6 +46,10 @@ class Show extends Component
         ]);
 
         $chat->pushTask($task);
+
+        if ($this->employee->email) {
+            $mailer->send(auth()->user(), $this->employee->email, new TaskAssignedMail($this->employee, $task));
+        }
 
         $this->reset(['newTaskTitle', 'newTaskDescription', 'newTaskPriority', 'showTaskForm']);
         $this->newTaskPriority = 'normal';
@@ -63,7 +69,7 @@ class Show extends Component
         $this->commentText[$taskId] = '';
     }
 
-    public function sendAdminMessage(ChatMessageService $chat): void
+    public function sendAdminMessage(ChatMessageService $chat, DynamicMailer $mailer): void
     {
         $text = trim($this->adminMessage);
 
@@ -94,6 +100,10 @@ class Show extends Component
                 ]);
 
                 $chat->pushTask($task);
+
+                if ($this->employee->email) {
+                    $mailer->send(auth()->user(), $this->employee->email, new TaskAssignedMail($this->employee, $task));
+                }
             }
         } else {
             $chat->pushManagerMessage($this->employee, auth()->user(), $text);

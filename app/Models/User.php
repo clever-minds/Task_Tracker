@@ -22,6 +22,13 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'mail_host',
+        'mail_port',
+        'mail_username',
+        'mail_password',
+        'mail_encryption',
+        'mail_from_address',
+        'mail_from_name',
     ];
 
     /**
@@ -32,6 +39,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'mail_password',
     ];
 
     /**
@@ -44,6 +52,15 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'mail_password' => 'encrypted',
         ];
+    }
+
+    public function hasMailConfigured(): bool
+    {
+        return filled($this->mail_host)
+            && filled($this->mail_username)
+            && filled($this->mail_password)
+            && filled($this->mail_from_address);
     }
 }
