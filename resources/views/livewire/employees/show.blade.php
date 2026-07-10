@@ -5,20 +5,14 @@
         <!-- Header Profile Card -->
         <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900">{{ $employee->name }}</h3>
-                    </div>
-                    
-                    <!-- Date Picker Filter -->
-                    <div class="flex items-center gap-1">
-                        <input type="date" wire:model.live="filterDate" class="text-xs rounded-lg border-gray-250 py-1 px-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 hover:bg-gray-100 font-semibold text-gray-700 shadow-sm transition">
-                        @if($filterDate)
-                            <button wire:click="$set('filterDate', null)" class="text-xs text-rose-600 hover:text-rose-800 font-bold px-1.5 transition">Clear</button>
-                        @endif
-                    </div>
+                <!-- Date Picker Filter -->
+                <div class="flex items-center gap-1">
+                    <input type="date" wire:model.live="filterDate" class="text-xs rounded-lg border-gray-250 py-1 px-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 hover:bg-gray-100 font-semibold text-gray-700 shadow-sm transition">
+                    @if($filterDate)
+                        <button wire:click="$set('filterDate', null)" class="text-xs text-rose-600 hover:text-rose-800 font-bold px-1.5 transition">Clear</button>
+                    @endif
                 </div>
-                
+
                 <!-- Status Badge -->
                 <div class="flex items-center gap-2">
                     @php
