@@ -16,13 +16,13 @@
     </header>
 
     <form wire:submit="save" class="mt-6 space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="sm:col-span-2">
-                <x-input-label for="mail_host" value="SMTP Host" />
-                <x-text-input id="mail_host" wire:model="mail_host" type="text" class="mt-1 block w-full" placeholder="smtp.gmail.com" />
-                <x-input-error class="mt-2" :messages="$errors->get('mail_host')" />
-            </div>
+        <div>
+            <x-input-label for="mail_host" value="SMTP Host" />
+            <x-text-input id="mail_host" wire:model="mail_host" type="text" class="mt-1 block w-full" placeholder="smtp.gmail.com" />
+            <x-input-error class="mt-2" :messages="$errors->get('mail_host')" />
+        </div>
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
                 <x-input-label for="mail_port" value="Port" />
                 <x-text-input id="mail_port" wire:model="mail_port" type="number" class="mt-1 block w-full" placeholder="587" />
@@ -39,13 +39,13 @@
                 <x-input-error class="mt-2" :messages="$errors->get('mail_encryption')" />
             </div>
 
-            <div class="sm:col-span-2">
+            <div>
                 <x-input-label for="mail_username" value="Username" />
                 <x-text-input id="mail_username" wire:model="mail_username" type="text" class="mt-1 block w-full" placeholder="you@example.com" autocomplete="off" />
                 <x-input-error class="mt-2" :messages="$errors->get('mail_username')" />
             </div>
 
-            <div class="sm:col-span-2">
+            <div>
                 <x-input-label for="mail_password" value="Password" />
                 <x-text-input id="mail_password" wire:model="mail_password" type="password" class="mt-1 block w-full" placeholder="{{ $hasMailConfigured ? 'Leave blank to keep current password' : '' }}" autocomplete="new-password" />
                 <x-input-error class="mt-2" :messages="$errors->get('mail_password')" />
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex flex-wrap items-center gap-4">
             <x-primary-button>Save</x-primary-button>
 
             @if ($saved)
