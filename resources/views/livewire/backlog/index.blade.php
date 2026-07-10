@@ -6,19 +6,21 @@
     </div>
 
     <div x-data="{ show: @entangle('showForm') }" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4 scale-95" x-transition:enter-end="opacity-100 transform translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform translate-y-0 scale-100" x-transition:leave-end="opacity-0 transform -translate-y-4 scale-95" class="origin-top" x-cloak>
-        <form wire:submit="create" class="bg-white shadow-sm rounded-lg p-6 space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Title</label>
-                <input type="text" wire:model="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                @error('title') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        <form wire:submit="create" class="bg-white shadow-sm rounded-lg p-4 sm:p-6 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" wire:model="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    @error('title') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Priority (higher = shown first)</label>
+                    <input type="number" wire:model="priority" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                </div>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Description</label>
                 <textarea wire:model="description" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Priority (higher = shown first)</label>
-                <input type="number" wire:model="priority" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             </div>
             <button type="submit" class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-500">Add to backlog</button>
         </form>

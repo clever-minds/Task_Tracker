@@ -6,26 +6,28 @@
     </div>
 
     <div x-data="{ show: @entangle('showForm') }" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4 scale-95" x-transition:enter-end="opacity-100 transform translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform translate-y-0 scale-100" x-transition:leave-end="opacity-0 transform -translate-y-4 scale-95" class="origin-top" x-cloak>
-        <form wire:submit="create" class="bg-white shadow-sm rounded-lg p-6 space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" wire:model="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        <form wire:submit="create" class="bg-white shadow-sm rounded-lg p-4 sm:p-6 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" wire:model="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Check-in frequency</label>
+                    <select wire:model="checkin_frequency" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="daily">Daily</option>
+                        <option value="every_2_days">Every 2 days</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Email (for daily reminder only, optional)</label>
                 <input type="email" wire:model="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                 @error('email') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Check-in frequency</label>
-                <select wire:model="checkin_frequency" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    <option value="daily">Daily</option>
-                    <option value="every_2_days">Every 2 days</option>
-                    <option value="weekly">Weekly</option>
-                </select>
             </div>
 
             <button type="submit" class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-500">
