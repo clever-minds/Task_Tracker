@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" x-effect="document.body.classList.toggle('overflow-hidden', open)" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -74,37 +74,56 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.*')">
-                {{ __('Employees') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('backlog.index')" :active="request()->routeIs('backlog.*')">
-                {{ __('Backlog') }}
-            </x-responsive-nav-link>
-        </div>
+    <!-- Mobile off-canvas menu -->
+    <div x-show="open" class="fixed inset-0 z-40 sm:hidden" style="display: none;">
+        <div x-show="open"
+                x-transition:enter="transition-opacity ease-linear duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition-opacity ease-linear duration-300"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                @click="open = false"
+                class="fixed inset-0 bg-black/40"></div>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+        <div x-show="open"
+                x-transition:enter="transform transition ease-in-out duration-300"
+                x-transition:enter-start="translate-x-full"
+                x-transition:enter-end="translate-x-0"
+                x-transition:leave="transform transition ease-in-out duration-300"
+                x-transition:leave-start="translate-x-0"
+                x-transition:leave-end="translate-x-full"
+                class="fixed inset-y-0 right-0 w-72 max-w-[80%] bg-white shadow-xl flex flex-col">
+            <div class="flex items-center justify-between px-4 h-16 border-b border-gray-100 shrink-0">
+                <div class="min-w-0">
+                    <div class="font-medium text-base text-gray-800 truncate">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500 truncate">{{ Auth::user()->email }}</div>
+                </div>
+
+                <button @click="open = false" class="p-2 -me-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+            <div class="flex-1 overflow-y-auto py-2 space-y-1">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.*')">
+                    {{ __('Employees') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('backlog.index')" :active="request()->routeIs('backlog.*')">
+                    {{ __('Backlog') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('settings.mail')">
+                <x-responsive-nav-link :href="route('settings.mail')" :active="request()->routeIs('settings.mail')">
                     {{ __('Mail Settings') }}
                 </x-responsive-nav-link>
 
-                <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
