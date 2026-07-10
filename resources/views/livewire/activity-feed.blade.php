@@ -1,4 +1,4 @@
-<div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6" wire:poll.5s>
+<div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6" wire:poll.5s>
     <div class="flex items-center justify-between mb-4">
         <div>
             <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide">Live Activity Feed</h4>

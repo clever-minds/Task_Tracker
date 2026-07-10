@@ -1,9 +1,9 @@
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8" wire:poll.4s>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8" wire:poll.4s>
     <!-- Left Column: Metrics & Tasks -->
-    <div class="lg:col-span-7 space-y-6">
-        
+    <div class="lg:col-span-7 space-y-4 sm:space-y-6">
+
         <!-- Header Profile Card -->
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <!-- Date Picker Filter -->
                 <div class="flex items-center gap-1">
@@ -73,9 +73,9 @@
         @endif
 
         <!-- Metrics Dashboard Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             <!-- Completion Rate -->
-            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 relative overflow-hidden flex flex-col justify-between">
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between">
                 <p class="text-xs font-bold uppercase tracking-wider text-gray-400">Completion Rate</p>
                 <div class="flex items-end justify-between mt-2">
                     <p class="text-2xl font-bold text-gray-900">{{ $metrics['completion_rate'] }}%</p>
@@ -86,7 +86,7 @@
             </div>
             
             <!-- Avg Close Time -->
-            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 relative overflow-hidden flex flex-col justify-between">
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between">
                 <p class="text-xs font-bold uppercase tracking-wider text-gray-400">Avg. Close Time</p>
                 <div class="flex items-end justify-between mt-2">
                     <p class="text-2xl font-bold text-gray-900">
@@ -99,7 +99,7 @@
             </div>
 
             <!-- Rework Rate -->
-            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 relative overflow-hidden flex flex-col justify-between">
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between">
                 <p class="text-xs font-bold uppercase tracking-wider text-gray-400">Rework Rate</p>
                 <div class="flex items-end justify-between mt-2">
                     <p class="text-2xl font-bold text-gray-900">{{ $metrics['rework_rate'] ?? '0' }}</p>
@@ -110,7 +110,7 @@
             </div>
 
             <!-- Idle Days -->
-            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 relative overflow-hidden flex flex-col justify-between">
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between">
                 <p class="text-xs font-bold uppercase tracking-wider text-gray-400">Idle Days (Total)</p>
                 <div class="flex items-end justify-between mt-2">
                     <p class="text-2xl font-bold text-gray-900">{{ $metrics['idle_days'] }}</p>
@@ -122,7 +122,7 @@
         </div>
 
         <!-- Task Tabs and Lists -->
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6" x-data="{ tab: 'active' }">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6" x-data="{ tab: 'active' }">
             <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
                 <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide">Tasks Board</h4>
                 <div class="flex gap-2 text-xs bg-gray-50 p-1 rounded-lg border border-gray-100">
@@ -234,7 +234,7 @@
         </div>
 
         <!-- Daily log history -->
-        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6">
             <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4">Check-in Logs</h4>
             <div class="space-y-4">
                 @forelse ($dailyLogs as $log)

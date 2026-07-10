@@ -1,4 +1,4 @@
-<div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6" x-data="{ notice: false }" x-on:backlog-empty.window="notice = true; setTimeout(() => notice = false, 3000)">
+<div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6" x-data="{ notice: false }" x-on:backlog-empty.window="notice = true; setTimeout(() => notice = false, 3000)">
     <div class="flex items-start justify-between mb-4">
         <div>
             <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide">Needs Attention / Idle</h4>

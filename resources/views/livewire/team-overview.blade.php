@@ -1,6 +1,6 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8" wire:poll.4s>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8" wire:poll.4s>
     @forelse ($employees as $employee)
-        <div class="bg-white border border-gray-150 hover:border-indigo-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
+        <div class="bg-white border border-gray-150 hover:border-indigo-200 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group">
             <!-- Decorative Accent line -->
             <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition duration-300"></div>
 
