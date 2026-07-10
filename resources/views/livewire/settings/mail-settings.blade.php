@@ -16,13 +16,13 @@
     </header>
 
     <form wire:submit="save" class="mt-6 space-y-6">
-        <div>
-            <x-input-label for="mail_host" value="SMTP Host" />
-            <x-text-input id="mail_host" wire:model="mail_host" type="text" class="mt-1 block w-full" placeholder="smtp.gmail.com" />
-            <x-input-error class="mt-2" :messages="$errors->get('mail_host')" />
-        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="sm:col-span-2 lg:col-span-1">
+                <x-input-label for="mail_host" value="SMTP Host" />
+                <x-text-input id="mail_host" wire:model="mail_host" type="text" class="mt-1 block w-full" placeholder="smtp.gmail.com" />
+                <x-input-error class="mt-2" :messages="$errors->get('mail_host')" />
+            </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
                 <x-input-label for="mail_port" value="Port" />
                 <x-text-input id="mail_port" wire:model="mail_port" type="number" class="mt-1 block w-full" placeholder="587" />
